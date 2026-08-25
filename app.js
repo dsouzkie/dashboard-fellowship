@@ -1073,8 +1073,8 @@ async function renderLogin() {
           </div>
           <div class="flex" style="gap: 10px; align-items: center;">
     <div style="display:flex; align-items:center; gap:8px; margin-right:15px; padding-right:15px; border-right:1px solid rgba(148,163,184,0.2);">
-      ${renderAvatar(AppState.currentUser.name, AppState.currentUser.color, 'sm', AppState.currentUser.team)}
-      <span style="color:#F1F5F9;font-weight:600;font-size:14px;">${AppState.currentUser.name}</span>
+      ${AppState.currentUser ? renderAvatar(AppState.currentUser.name, AppState.currentUser.color, 'sm', AppState.currentUser.team) : ''}
+      ${AppState.currentUser ? `<span style="color:#F1F5F9;font-weight:600;font-size:14px;">${AppState.currentUser.name}</span>` : ''}
     </div>
             <button class="btn btn--ghost" id="btnCancelLogin" style="flex: 1">Cancel</button>
             <button class="btn btn--primary login-btn" id="btnSubmitLogin" style="flex: 2">Login</button>
@@ -1674,8 +1674,8 @@ function renderMyFellows() {
         </div>
         <div class="flex" style="gap: 10px; align-items: center;">
     <div style="display:flex; align-items:center; gap:8px; margin-right:15px; padding-right:15px; border-right:1px solid rgba(148,163,184,0.2);">
-      ${renderAvatar(AppState.currentUser.name, AppState.currentUser.color, 'sm', AppState.currentUser.team)}
-      <span style="color:#F1F5F9;font-weight:600;font-size:14px;">${AppState.currentUser.name}</span>
+      ${AppState.currentUser ? renderAvatar(AppState.currentUser.name, AppState.currentUser.color, 'sm', AppState.currentUser.team) : ''}
+      ${AppState.currentUser ? `<span style="color:#F1F5F9;font-weight:600;font-size:14px;">${AppState.currentUser.name}</span>` : ''}
     </div>
           <div style="background: rgba(30,41,59,0.8); border-radius: 8px; padding: 4px; display: flex; border: 1px solid rgba(148,163,184,0.1);">
             <button class="btn btn--sm ${AppState.myFellowsViewMode === 'grid' ? 'btn--primary' : 'btn--ghost'}" id="btnMyViewGrid" style="border-radius: 6px;">📱 Grid</button>
@@ -1801,8 +1801,8 @@ function renderAllFellows() {
         </div>
         <div class="flex" style="gap: 10px; align-items: center;">
     <div style="display:flex; align-items:center; gap:8px; margin-right:15px; padding-right:15px; border-right:1px solid rgba(148,163,184,0.2);">
-      ${renderAvatar(AppState.currentUser.name, AppState.currentUser.color, 'sm', AppState.currentUser.team)}
-      <span style="color:#F1F5F9;font-weight:600;font-size:14px;">${AppState.currentUser.name}</span>
+      ${AppState.currentUser ? renderAvatar(AppState.currentUser.name, AppState.currentUser.color, 'sm', AppState.currentUser.team) : ''}
+      ${AppState.currentUser ? `<span style="color:#F1F5F9;font-weight:600;font-size:14px;">${AppState.currentUser.name}</span>` : ''}
     </div>
           <div style="background: rgba(30,41,59,0.8); border-radius: 8px; padding: 4px; display: flex; border: 1px solid rgba(148,163,184,0.1); margin-right: 15px;">
             <button class="btn btn--sm ${AppState.allFellowsViewMode === 'grid' ? 'btn--primary' : 'btn--ghost'}" id="btnViewGrid" style="border-radius: 6px;">📱 Grid</button>
