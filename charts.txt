@@ -1,0 +1,56 @@
+Created At: 2026-07-23T12:55:57+05:30
+Completed At: 2026-07-23T12:56:00+05:30
+
+				The command completed successfully.
+				Output:
+				1040:     
+1041:     ctx.fillStyle = item.color || '#3b82f6';
+1042:     // Round corners top
+1043:     ctx.beginPath();
+1044:     ctx.roundRect(x, y, w, barHeight, [4, 4, 0, 0]);
+1045:     ctx.fill();
+1046:     
+1047:     // Label
+1048:     ctx.fillStyle = '#64748b';
+1049:     ctx.font = '10px Inter, sans-serif';
+1050:     ctx.textAlign = 'center';
+1051:     ctx.fillText(item.label.substring(0,5), x + w/2, height - padding + 15);
+1052:     
+1053:     // Value
+1054:     ctx.fillStyle = '#F1F5F9';
+1055:     ctx.font = 'bold 12px Inter, sans-serif';
+1056:     ctx.fillText(item.value, x + w/2, y - 5);
+1057:   });
+1058: }
+1059: 
+1060: function renderCharts() {
+1061:   if (AppState.currentView !== 'dashboard') return;
+1062:   const fellows = AppState.fellows;
+1063:   const statusColors = {
+1064:     'Active': '#10B981', 'Ghosted': '#64748B', 'On Hold': '#F59E0B',
+1065:     'Dropped Out': '#EF4444', 'Not Yet Started': '#3B82F6', 'Inactive': '#94A3B8'
+1066:   };
+1067: 
+1068:   // Status Donut
+1069:   const statusCounts = {};
+1070:   fellows.forEach(f => { statusCounts[f.fellowStatus] = (statusCounts[f.fellowStatus] || 0) + 1; });
+1071:   const statusData = Object.keys(statusCounts).map(s => ({ label: s, value: statusCounts[s], color: statusColors[s] || '#CBD5E1' }));
+1072:   renderDonutChart('statusChart', statusData);
+1073:   renderLegend('statusLegend', statusData);
+1074: 
+1075:   // Club Health Donut
+1076:   const activityColors = { 'Active': '#10B981', 'Inactive': '#64748B', 'Not Set Up': '#EF4444', 'Management Restraint': '#F59E0B' };
+1077:   const activityCounts = {};
+1078:   fellows.forEach(f => { const a = f.clubPageActivity || 'Not Set Up'; activityCounts[a] = (activityCounts[a] || 0) + 1; });
+1079:   const activityData = Object.keys(activityCounts).map(a => ({ label: a, value: activityCounts[a], color: activityColors[a] || '#CBD5E1' }));
+1080:   renderDonutChart('clubHealthChart', activityData);
+1081:   renderLegend('clubHealthLegend', activityData);
+1082: 
+1083:   // My Fellows Donut
+1084:   const user = AppState.currentUser;
+1085:   if (user && !user.isAdmin) {
+1086:     const myFellows = fellows.filter(f => f.pocAssigned === user.name);
+1087:     const myStatusCounts = {};
+1088:     myFellows.forEach(f => { myStatusCounts[f.fellowStatus] = (myStatusCounts[f.fellowStatus] || 0) + 1; });
+1089:     const myStatusData = Object.keys(myStatusCounts).map(s => ({ label: s, value: myStatusCounts[s], color: statusColors[s] || '#CBD5E1' }));
+
