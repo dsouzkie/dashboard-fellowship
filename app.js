@@ -1631,7 +1631,22 @@ function renderMyFellows() {
     `;
   } else {
     const cardsHtml = myFellows.map(f => {
-      const photoUrl = f.photoUrl || null; const displayName = f.fellowName || 'Unknown'; const displayCollege = f.collegeName || 'Unknown';
+       let displayName = f.fellowName;
+      let displayCollege = f.collegeName;
+      let photoUrl = f.photoUrl || null;
+      if (!displayName || displayName === 'Unknown' || displayName.trim() === '' || !displayCollege || displayCollege === 'Unknown' || displayCollege.trim() === '' || !photoUrl) {
+        if (typeof findAcceptanceForFellow === 'function') {
+          const acc = findAcceptanceForFellow(f, true);
+          if (acc) {
+            if (acc.photo && !photoUrl) photoUrl = getDriveImageUrl(acc.photo);
+            if (acc.fullName && (!displayName || displayName === 'Unknown' || displayName.trim() === '')) displayName = acc.fullName;
+            if (acc.college && (!displayCollege || displayCollege === 'Unknown' || displayCollege.trim() === '')) displayCollege = acc.college;
+          }
+        }
+      }
+      displayName = displayName || 'Unknown';
+      displayCollege = displayCollege || 'Unknown';
+
       
       const teamColor = TEAM_COLORS[f.team]?.primary || '#7C3AED';
       const poc = TEAM.find(t => t.name === f.pocAssigned) || TEAM[TEAM.length - 1]; // fallback
@@ -1758,7 +1773,22 @@ function renderAllFellows() {
   } else {
     // Grid View
     const cardsHtml = filtered.map(f => {
-      const photoUrl = f.photoUrl || null; const displayName = f.fellowName || 'Unknown'; const displayCollege = f.collegeName || 'Unknown';
+       let displayName = f.fellowName;
+      let displayCollege = f.collegeName;
+      let photoUrl = f.photoUrl || null;
+      if (!displayName || displayName === 'Unknown' || displayName.trim() === '' || !displayCollege || displayCollege === 'Unknown' || displayCollege.trim() === '' || !photoUrl) {
+        if (typeof findAcceptanceForFellow === 'function') {
+          const acc = findAcceptanceForFellow(f, true);
+          if (acc) {
+            if (acc.photo && !photoUrl) photoUrl = getDriveImageUrl(acc.photo);
+            if (acc.fullName && (!displayName || displayName === 'Unknown' || displayName.trim() === '')) displayName = acc.fullName;
+            if (acc.college && (!displayCollege || displayCollege === 'Unknown' || displayCollege.trim() === '')) displayCollege = acc.college;
+          }
+        }
+      }
+      displayName = displayName || 'Unknown';
+      displayCollege = displayCollege || 'Unknown';
+
       
       const teamColor = TEAM_COLORS[f.team]?.primary || '#7C3AED';
       const poc = TEAM.find(t => t.name === f.pocAssigned) || TEAM[TEAM.length - 1]; // fallback
@@ -2837,6 +2867,16 @@ function renderFellowProfile(fellowId) {
     const dInsta = fellow.instagram || '';
 
     let photoUrl = fellow.photoUrl || null;
+    if (!photoUrl) {
+      if (typeof findAcceptanceForFellow === 'function') {
+        const acc = findAcceptanceForFellow(fellow, true);
+        if (acc && acc.photo) photoUrl = getDriveImageUrl(acc.photo);
+      }
+      if (!photoUrl && typeof findAlumniForFellow === 'function') {
+        const alu = findAlumniForFellow(fellow);
+        if (alu && alu.nominatedFellowPhoto) photoUrl = getDriveImageUrl(alu.nominatedFellowPhoto);
+      }
+    }
 
     const poc = TEAM.find(t => t.name === fellow.pocAssigned) || TEAM[TEAM.length - 1];
 
