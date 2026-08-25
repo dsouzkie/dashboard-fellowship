@@ -1046,7 +1046,7 @@ async function renderLogin() {
     <div class="team-btn" data-name="${t.name}">
       ${renderAvatar(t.name, t.color, 'lg', t.team)}
       <div>${t.name}</div>
-      ${AppState.currentUser.isAdmin ? `<div style="font-size:10px; color:#EF4444; margin-top:4px;">${t.password}</div>` : ''}
+      ${AppState.currentUser && AppState.currentUser.isAdmin ? `<div style="font-size:10px; color:#EF4444; margin-top:4px;">${t.password}</div>` : ''}
     </div>
   `).join('');
   
@@ -1808,7 +1808,7 @@ function renderAllFellows() {
             <button class="btn btn--sm ${AppState.allFellowsViewMode === 'grid' ? 'btn--primary' : 'btn--ghost'}" id="btnViewGrid" style="border-radius: 6px;">📱 Grid</button>
             <button class="btn btn--sm ${AppState.allFellowsViewMode === 'sheet' ? 'btn--primary' : 'btn--ghost'}" id="btnViewSheet" style="border-radius: 6px;">📊 Sheet</button>
           </div>
-          ${AppState.currentUser.isAdmin ? `
+          ${AppState.currentUser && AppState.currentUser.isAdmin ? `
             <button class="btn btn--secondary" onclick="syncFromSheets()">🔄 Refresh</button>
   <button class="btn btn--secondary" onclick="exportCSV()" style="margin-left: 10px;">⬇️ Download Database</button>
             <button class="btn btn--secondary" onclick="renderMassAddModal()" style="margin-right: 10px;">z Mass Add</button>
