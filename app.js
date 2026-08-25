@@ -4564,13 +4564,13 @@ function generateMassAddGrid() {
         <td><input type="text" class="form-input ma-name" placeholder="Name"></td>
         <td><input type="text" class="form-input ma-phone" placeholder="Phone"></td>
         <td><input type="text" class="form-input ma-email" placeholder="Email"></td>
-        <td><select class="form-select ma-city"><option value="">Select City</option>${Array.from(new Set(AppState.fellows.map(f => f.city).filter(Boolean))).sort().map(c => \`<option value="\${c}">\${c}</option>\`).join('')}</select></td>
+        <td><select class="form-select ma-city"><option value="">Select City</option>${Array.from(new Set(AppState.fellows.map(f => f.city).filter(Boolean))).sort().map(c => `<option value="\${c}">\${c}</option>`).join('')}</select></td>
         <td>
           
-          <select class="form-select ma-poc">${TEAM.map(t => \`<option value="\${t.name}">\${t.name}</option>\`).join('')}</select>
+          <select class="form-select ma-poc">${TEAM.map(t => `<option value="\${t.name}">\${t.name}</option>`).join('')}</select>
         </td>
         <td>
-          <select class="form-select ma-status">${['Active', 'Ghosted', 'On Hold', 'Dropped Out'].map(s => \`<option value="\${s}">\${s}</option>\`).join('')}</select>
+          <select class="form-select ma-status">${['Active', 'Ghosted', 'On Hold', 'Dropped Out'].map(s => `<option value="\${s}">\${s}</option>`).join('')}</select>
 
         </td>
         <td>
