@@ -779,30 +779,28 @@ function parseAcceptanceCSV(csvText) {
   const result = [];
   for (let i = 1; i < rows.length; i++) {
     const row = rows[i];
-    if (!row[2] || row[2].trim() === '' || row[2].trim().toLowerCase() === 'unknown') continue;
+    if (!row[3] || row[3].trim() === '' || row[3].trim().toLowerCase() === 'unknown') continue;
       
       result.push({
         timestamp: row[0] || '',
-        email: row[1] || '',
-        fullName: row[2] || '',
-        phone: row[3] || '',
-        instagram: row[4] || '',
-        dob: row[5] || '',
-        college: row[6] || '',
-        city: row[7] || '',
-        state: row[8] || '',
-        capacity: row[9] || '',
-        address: row[10] || '',
-        tshirt: row[11] || '',
-        hocName: row[12] || '',
-        hocEmail: row[13] || '',
-        hocPhone: row[14] || '',
-        hooName: row[15] || '',
-        hooEmail: row[16] || '',
-        hooPhone: row[17] || '',
-        faName: row[18] || '',
-        faEmail: row[19] || '',
-        faPhone: row[20] || '',
+        college: row[1] || '',
+        city: row[2] || '',
+        fullName: row[3] || '',
+        phone: row[4] || '',
+        whatsapp: row[5] || '',
+        email: row[8] || '',
+        instagram: row[9] || '',
+        dob: row[10] || '',
+        state: row[11] || '',
+        capacity: row[12] || '',
+        address: row[13] || '',
+        tshirt: row[14] || '',
+        hocName: row[15] || '',
+        hocPhone: row[16] || '',
+        hocEmail: row[17] || '',
+        hooName: row[18] || '',
+        hooPhone: row[19] || '',
+        hooEmail: row[20] || '',
         photo: row[29] || '',
         video: row[30] || ''
       });
